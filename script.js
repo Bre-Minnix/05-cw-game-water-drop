@@ -4,6 +4,7 @@ let level = 1
 let nextLevelScore = 150
 let timeLeft = 30
 let gameRunning = false
+let cleanCaught = 0
 
 const gameArea = document.getElementById("gameArea")
 const bucket = document.getElementById("bucket")
@@ -127,6 +128,10 @@ function startGame() {
   scoreDisplay.textContent = score
   levelDisplay.textContent = level
   timerDisplay.textContent = timeLeft
+  cleanCaught = 0
+  rainbowCount = 0
+  cleanMissed = false
+  updateMilestoneDisplay()
 
   // Reset game area and prepare bucket
   gameArea.querySelectorAll(".drop").forEach((d) => d.remove())
@@ -311,6 +316,7 @@ function moveBucketTo(x) {
 
 function updateScoreDisplay() {
   scoreDisplay.textContent = score
+  updateMilestoneDisplay()
 
   if (score > highScore) {
     highScore = score
@@ -323,6 +329,25 @@ function updateScoreDisplay() {
     levelUp()
   }
 }
+
+function updateMilestoneDisplay() {
+  const milestone = document.getElementById("milestone")
+  if (!milestone) return
+
+  const nextGoal = Math.ceil((score + 1) / 150) * 150
+  const pointsToNext = Math.max(0, nextGoal - score)
+
+  if (score === 0) {
+    milestone.textContent = "Hit 50 points for your first milestone!"
+  } else {
+    milestone.textContent = `Current milestone: ${score} points, ${pointsToNext} points to next (${nextGoal}).`
+  }
+
+  if (score >= 50) {
+    unlockAchievement("firstCatch")
+  }
+}
+
 
 function levelUp() {
   level += 1

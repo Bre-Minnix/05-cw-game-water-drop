@@ -250,6 +250,29 @@ box-shadow:0 14px 40px rgba(0,0,0,0.22);
   line-height:1.4;
 }
 
+#milestone {
+  font-size: 14px;
+  color: #0f4c81;
+  font-weight: 700;
+}
+
+.charity-footer {
+  margin-top: 20px;
+  color: #064c6c;
+  font-size: 14px;
+  padding: 12px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.charity-footer a {
+  color: #2b8ef2;
+  text-decoration: underline;
+}
+
 .achievements {
   margin-top:18px;
   text-align:left;
